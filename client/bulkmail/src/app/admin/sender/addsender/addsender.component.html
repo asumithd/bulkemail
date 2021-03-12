@@ -1,0 +1,146 @@
+<div class="contentHeader">
+    <span>
+        <h4>New Item</h4>
+    </span>
+    <div class="pull-right">
+        <button class="btn theme-btn" routerLink="/items">View All</button>
+    </div>
+</div>
+<div class="contentBody conbox col-lg-12">
+
+    <form class="form-horizontal" *ngIf="itemForm" (ngSubmit)="submitform(itemForm)" [formGroup]="itemForm">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <label class="col-md-3">Type</label>
+                            <div class="p-formgroup-inline">
+                                <div class="p-field-checkbox p-col ">
+                                    <p-radioButton formControlName="itemType" name="itemType" value="Goods">
+                                    </p-radioButton>
+                                    <label>Goods</label>
+                                </div>
+                                <div class="p-field-checkbox p-col ">
+                                    <p-radioButton formControlName="itemType" name="itemType" value="Service">
+                                    </p-radioButton>
+                                    <label>Service</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 font-red">Name*</label>
+                            <input class="form-control" formControlName="itemName" type="text" pInputText
+                                [ngClass]="{ 'is-invalid': submitted && f.itemName.errors }" />
+
+                        </div>
+                        <div *ngIf="submitted && f.itemName.errors" class="invalid-feedback error">
+                            <div *ngIf="f.itemName.errors.required">* Item Name is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3">Unit</label>
+                            <p-dropdown class="form-control" [options]="Unit" formControlName="itemUnit"
+                                placeholder="Select Unit" optionLabel="name"></p-dropdown>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="contentCheck">
+                            <p-checkbox (click)="checkboxseletc($event)"  [(ngModel)]="checked" formControlName="itemSaleInfo" binary="true"
+                                inputId="binary" >
+                            </p-checkbox>
+                            <label for="binary" style="margin: 0;">Sales Information</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 font-red" tooltipPosition="right"
+                                pTooltip="The rate at which you're going to sell this item"><span
+                                    class="text-dashed-underline">Selling Price*</span></label>
+                            <input class="form-control" formControlName="itemSaleSellingPrice"
+                                [attr.disabled]="!checked ? false : null" type="text" pInputText [ngClass]="{ 'is-invalid': submitted && f.itemSaleSellingPrice.errors }">
+                        </div>
+                        <div [ngClass]="{'dishid': !checked}" *ngIf="submitted && f.itemSaleSellingPrice.errors" class="invalid-feedback error">
+                            <div *ngIf="f.itemSaleSellingPrice.errors.required">* Selling Price is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 font-red" tooltipPosition="right"
+                                pTooltip="All Purchase transactions for this item will be tracked under this account"><span
+                                    class="text-dashed-underline">Account*</span></label>
+
+                            <p-dropdown [disabled]="!checked" [options]="sgroupedCities"
+                                [ngClass]="{'disablel': !checked}" class="form-control"
+                                formControlName="itemSaleAccount" placeholder="Select Sales Account" [group]="true" [ngClass]="{ 'is-invalid': submitted && f.itemSaleAccount.errors }">
+                                <ng-template let-group pTemplate="group">
+                                    <div class="p-d-flex p-ai-center">
+                                        <span style="font-size: 11px;"
+                                            [ngClass]="{'disablel': !checked}">{{group.label}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                        </div>
+                        <div [ngClass]="{'dishid': !checked}" *ngIf="submitted && f.itemSaleAccount.errors" class="invalid-feedback error">
+                            <div *ngIf="f.itemSaleAccount.errors.required">* Account is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4">Description</label>
+                            <textarea class="form-control" [attr.disabled]="!checked ? false : null"
+                                formControlName="itemSaleDescription" type="text" pInputText></textarea>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="contentCheck">
+                            <p-checkbox [(ngModel)]="checkedp" binary="true" formControlName="itemPurInfo"
+                                inputId="binary">
+                            </p-checkbox>
+                            <label for="binary" style="margin: 0;">Purchase Information</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 font-red" tooltipPosition="right"
+                                pTooltip="The rate at which you purchased this item"><span
+                                    class="text-dashed-underline">Cost Price*</span></label>
+                            <input class="form-control" [attr.disabled]="!checkedp ? false : null"
+                                formControlName="itemPurSellingPrice" type="text" pInputText [ngClass]="{ 'is-invalid': submitted && f.itemPurSellingPrice.errors }">
+                        </div>
+                        <div [ngClass]="{'dishid': !checkedp}" *ngIf="submitted && f.itemPurSellingPrice.errors" class="invalid-feedback error">
+                            <div *ngIf="f.itemPurSellingPrice.errors.required">* Cost Price is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 font-red" tooltipPosition="right"
+                                pTooltip="All Purchase transactions for this item will be tracked under this account"><span
+                                    class="text-dashed-underline">Account*</span></label>
+                            <p-dropdown [disabled]="!checkedp" [options]="groupedCities" class="form-control"
+                                [ngClass]="{'disablel': !checkedp}" formControlName="itemPurAccount"
+                                [(ngModel)]="selectedCity3" placeholder="Select Purchase Account" [group]="true" [ngClass]="{ 'is-invalid': submitted && f.itemPurAccount.errors }"> 
+                                <ng-template let-group pTemplate="group">
+                                    <div class="p-d-flex p-ai-center">
+                                        <span style="font-size: 11px;"
+                                            [ngClass]="{'disablel': !checkedp}">{{group.label}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                        </div>
+                        <div [ngClass]="{'dishid': !checkedp}" *ngIf="submitted && f.itemPurAccount.errors" class="invalid-feedback error">
+                            <div *ngIf="f.itemPurAccount.errors.required">* Account is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4">Description</label>
+                            <textarea class="form-control" [attr.disabled]="!checkedp ? false : null"
+                                formControlName="itemPurDescription" type="text" pInputText></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-toolbar fixed-actions"> <button  class="btn btn-primary" type="submit">
+                Save
+            </button>&nbsp;
+            <button class="btn btn-secondary" (click)="reset()">Cancel</button>
+        </div>
+    </form>
+</div>
