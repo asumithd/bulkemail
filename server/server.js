@@ -61,7 +61,7 @@ mongoose.connection.once('open', function () {
 
 
 mongoose.set('useCreateIndex', true);
-const bulkmail = require('../controllers/bulkmail.controller.js');
+const bulkmail = require('../server/app/controllers/bulkmail.controller');
 app.post('/api/bulkmail', bulkmail.create);
 app.get('/api/bulkmail', bulkmail.findAll);
 app.get('/api/bulkmail/:id', bulkmail.findOne);

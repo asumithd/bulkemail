@@ -102,6 +102,8 @@
               <th>#</th>
               <th>Name</th>
               <th>bulkmailEmail</th>
+              <th>Contact</th>
+              <th>Whatsapp</th>
               <th>Action</th>
 
             </tr>
@@ -111,6 +113,8 @@
               <td>{{index+1 }}</td>
               <td>{{data.bulkmailName }}</td>
               <td>{{data.bulkmailEmail }}</td>
+              <td>{{data.bulkmailContact }}</td>
+              <td>{{data.bulkmailWhatsapp }}</td>
               <td>
                 <div class="icon-stacked">
                   <button (click)="showDialog(data)" type="button" class="btn edit">

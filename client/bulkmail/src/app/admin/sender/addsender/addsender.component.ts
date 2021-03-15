@@ -45,6 +45,8 @@ export class AddsenderComponent implements OnInit {
     this.senderForm = this.formBuilder.group({
       bulkmailName: [''],
       bulkmailEmail: [''],
+      bulkmailContact:[''],
+      bulkmailWhatsapp:['']
     })
 
 
