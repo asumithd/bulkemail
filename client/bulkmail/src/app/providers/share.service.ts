@@ -4,17 +4,6 @@ import { map, distinctUntilChanged } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Observable } from 'rxjs';
 
-export interface TokenPayload {
-  email: string;
-  password: string;
-  name?: string;
-}
-
-interface TokenResponse {
-  token: string;
-  user: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })

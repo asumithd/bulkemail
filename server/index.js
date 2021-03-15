@@ -14,7 +14,7 @@ function massMailer() {
         service: "Gmail",
         auth: {
             user: "sullansumith@gmail.com",
-            pass: "sumithdeepan"
+            pass: "sumithgggdeepan"
         }
     });
     self.invokeOperation();

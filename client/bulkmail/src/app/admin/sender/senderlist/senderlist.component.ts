@@ -16,7 +16,7 @@ export class SenderlistComponent implements OnInit {
   totalRecords: number;
   cols:any;
   modalDisplay: boolean;
-  itemForm:any;
+  senderForm:any;
   product:  any = {}
   constructor(
     private shareService: ShareService,
@@ -28,13 +28,16 @@ export class SenderlistComponent implements OnInit {
     this.getTableData();
   }
   showDialog(data) {
+console.log(data);
 
-    this.router.navigate(['/items/edititem/' + data._id ]);
+    this.router.navigate(['/sender/editsender/' + data._id ]);
   }
   
   getTableData() {
-    this.shareService.getData(constants.getitem).subscribe(
+    this.shareService.getData(constants.getbulkmail).subscribe(
       results => {
+        console.log(results);
+        
         this.datasource = results.data;
         this.totalRecords = this.datasource.length;
       },
@@ -44,7 +47,7 @@ export class SenderlistComponent implements OnInit {
   }
  
   updateData(id, val) {
-    this.shareService.update(constants.getitem + id, val).subscribe(res => {
+    this.shareService.update(constants.getbulkmail + id, val).subscribe(res => {
       this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Updated Successfully' });
     },
       err => {
@@ -58,7 +61,7 @@ export class SenderlistComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this data?',
       accept: () => {
-        this.shareService.delete(constants.getitem + val._id).subscribe(res => {
+        this.shareService.delete(constants.getbulkmail + val._id).subscribe(res => {
           var index = this.datasource.indexOf(val);
           if (index !== -1) {
             this.datasource.splice(index, 1);
@@ -71,8 +74,5 @@ export class SenderlistComponent implements OnInit {
     });
   }
     
- 
-  submitform(d){
 
-  }
 }

@@ -1,11 +1,10 @@
-const rootPath = 'http://localhost:5000/';
+const rootPath = 'http://localhost:3000/';
 
 const apiPath = rootPath + 'api/';
 
 export const constants = {
-
-    getitem: apiPath + 'item/',
-
+    getbulkmail: apiPath + 'bulkmail/',
+    getinvoices: apiPath + 'invoices/'
 };
 
 
